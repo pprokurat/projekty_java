@@ -1,12 +1,15 @@
 package pl.patryk.ztpj.model;
 
+import pl.patryk.ztpj.model.enums.StanowiskoEnum;
+
 public abstract class Pracownik {
     private int id;
-    private long pesel;
+    private Long pesel;
     private String imie;
     private String nazwisko;
     private int wynagrodzenie;
     private String telefon;
+    private String stanowisko;
 
     public int getId() {
         return id;
@@ -16,7 +19,7 @@ public abstract class Pracownik {
         this.id = id;
     }
 
-    public long getPesel() {
+    public Long getPesel() {
         return pesel;
     }
 
@@ -54,5 +57,13 @@ public abstract class Pracownik {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+
+    public String getStanowisko() {
+        return stanowisko;
+    }
+
+    public void setStanowisko(String stanowisko) {
+        this.stanowisko = stanowisko;
     }
 }

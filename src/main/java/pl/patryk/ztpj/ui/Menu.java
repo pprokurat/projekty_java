@@ -23,8 +23,12 @@ public class Menu implements UI{
                     lista.print();
                     break;
                 case 2:
+                    DodajPracownika dodaj = new DodajPracownika();
+                    dodaj.print();
                     break;
                 case 3:
+                    UsunPracownika usun = new UsunPracownika();
+                    usun.print();
                     break;
                 case 4:
                     break;

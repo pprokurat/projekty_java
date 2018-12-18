@@ -1,4 +1,169 @@
 package pl.patryk.ztpj.ui;
 
-public class DodajPracownika {
+import pl.patryk.ztpj.dao.PracownikDao;
+import pl.patryk.ztpj.model.Dyrektor;
+import pl.patryk.ztpj.model.Handlowiec;
+import pl.patryk.ztpj.model.Pracownik;
+import pl.patryk.ztpj.model.enums.StanowiskoEnum;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Scanner;
+
+public class DodajPracownika implements UI {
+
+    private PracownikDao pracownikDao = new PracownikDao();
+    private List<Pracownik> lista = pracownikDao.getAll();
+
+    public void print() {
+        System.out.println("2. Dodaj pracownika");
+        System.out.print("[D]yrektor/[H]andlowiec : ");
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String input = br.readLine();
+            switch (input.toLowerCase()) {
+                case "d":
+                    Dyrektor dyrektor = new Dyrektor();
+                    dyrektor.setStanowisko(StanowiskoEnum.DYREKTOR.name());
+                    System.out.println("2. Dodaj pracownika");
+                    System.out.println("[D]yrektor/[H]andlowiec : Dyrektor");
+                    System.out.println("\n------------------------");
+                    System.out.print("Identyfikator PESEL : ");
+                    Scanner in = new Scanner(System.in);
+                    Long l = in.nextLong();
+                    dyrektor.setPesel(l);
+                    System.out.print("\nImię : ");
+                    in = new Scanner(System.in);
+                    String s = in.nextLine();
+                    dyrektor.setImie(s);
+                    System.out.print("\nNazwisko : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    dyrektor.setNazwisko(s);
+                    System.out.println("\nWynagrodzenie (zł) : ");
+                    in = new Scanner(System.in);
+                    int intInput = in.nextInt();
+                    dyrektor.setWynagrodzenie(intInput);
+                    System.out.print("\nTelefon : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    dyrektor.setTelefon(s);
+                    System.out.println("\nDodatek słuzbowy (zł) : ");
+                    in = new Scanner(System.in);
+                    intInput = in.nextInt();
+                    dyrektor.setDodatek_sluzbowy(intInput);
+                    System.out.print("\nKarta służbowa numer : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    dyrektor.setKarta_sluzbowa(s);
+                    System.out.println("\nLimit kosztów/miesiąc (zł) : ");
+                    in = new Scanner(System.in);
+                    intInput = in.nextInt();
+                    dyrektor.setLimit_kosztow(intInput);
+
+                    System.out.println("\n\n2. Dodaj pracownika");
+                    System.out.print("[D]yrektor/[H]andlowiec : Dyrektor");
+                    System.out.println("\n------------------------");
+                    System.out.println("Imię : " + dyrektor.getImie());
+                    System.out.println("Nazwisko : " + dyrektor.getNazwisko());
+                    System.out.println("Stanowisko : " + dyrektor.getStanowisko());
+                    System.out.println("Wynagrodzenie (zł) : " + dyrektor.getWynagrodzenie());
+                    System.out.println("Telefon służbowy numer : " + dyrektor.getTelefon());
+                    System.out.println("Dodatek służbowy (zł) : " + dyrektor.getDodatek_sluzbowy());
+                    System.out.println("Karta służbowa numer : " + dyrektor.getKarta_sluzbowa());
+                    System.out.println("Limit kosztów/miesiąc (zł) : " + dyrektor.getLimit_kosztow());
+                    System.out.println("\n------------------------");
+                    System.out.println("[Enter] – potwierdź");
+                    System.out.println("[Q] – porzuć");
+
+                    String input2 = br.readLine();
+                    switch (input2.toLowerCase()) {
+                        case "q":
+                            Menu.print();
+                            break;
+                        case "":
+                            pracownikDao.save(dyrektor);
+                            System.out.println("dodano");
+                            break;
+                        default:
+                            System.out.println("Wybierz Enter lub Q");
+                            break;
+                    }
+                    Menu.print();
+                    break;
+                case "h":
+                    Handlowiec handlowiec = new Handlowiec();
+                    handlowiec.setStanowisko(StanowiskoEnum.HANDLOWIEC.name());
+                    System.out.println("2. Dodaj pracownika");
+                    System.out.println("[D]yrektor/[H]andlowiec : Dyrektor");
+                    System.out.println("\n------------------------");
+                    System.out.print("Identyfikator PESEL : ");
+                    in = new Scanner(System.in);
+                    l = in.nextLong();
+                    handlowiec.setPesel(l);
+                    System.out.print("\nImię : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    handlowiec.setImie(s);
+                    System.out.print("\nNazwisko : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    handlowiec.setNazwisko(s);
+                    System.out.println("\nWynagrodzenie (zł) : ");
+                    in = new Scanner(System.in);
+                    intInput = in.nextInt();
+                    handlowiec.setWynagrodzenie(intInput);
+                    System.out.print("\nTelefon : ");
+                    in = new Scanner(System.in);
+                    s = in.nextLine();
+                    handlowiec.setTelefon(s);
+                    System.out.println("\nProwizja (%) : ");
+                    in = new Scanner(System.in);
+                    intInput = in.nextInt();
+                    handlowiec.setProwizja(intInput);
+                    System.out.println("\nLimit prowizji/miesiąc (zł) : ");
+                    in = new Scanner(System.in);
+                    intInput = in.nextInt();
+                    handlowiec.setLimit_prowizji(intInput);
+
+                    System.out.println("\n\n2. Dodaj pracownika");
+                    System.out.print("[D]yrektor/[H]andlowiec : Handlowiec");
+                    System.out.println("\n------------------------");
+                    System.out.println("Imię : " + handlowiec.getImie());
+                    System.out.println("Nazwisko : " + handlowiec.getNazwisko());
+                    System.out.println("Stanowisko : " + handlowiec.getStanowisko());
+                    System.out.println("Wynagrodzenie (zł) : " + handlowiec.getWynagrodzenie());
+                    System.out.println("Telefon służbowy numer : " + handlowiec.getTelefon());
+                    System.out.println("Prowizja (%) : " + handlowiec.getProwizja());
+                    System.out.println("Limit prowizji/miesiąc (zł) : " + handlowiec.getLimit_prowizji());
+                    System.out.println("\n------------------------");
+                    System.out.println("[Enter] – potwierdź");
+                    System.out.println("[Q] – porzuć");
+
+                    input2 = br.readLine();
+                    switch (input2.toLowerCase()) {
+                        case "q":
+                            Menu.print();
+                            break;
+                        case "":
+                            pracownikDao.save(handlowiec);
+                            System.out.println("dodano");
+                            break;
+                        default:
+                            System.out.println("Wybierz Enter lub Q");
+                            break;
+                    }
+                    Menu.print();
+                    break;
+                default:
+                    Menu.print();
+                    break;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

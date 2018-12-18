@@ -54,18 +54,27 @@ public class ListaPracownikow implements UI {
         System.out.println("[Enter] – następny");
         System.out.println("[Q] – powrót");
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String input = br.readLine();
-            switch (input.toLowerCase()) {
-                case "q":
-                    Menu.print();
-                    break;
-                default:
-                    nr += 1;
-                    if (nr > lista_length)
-                        nr = 1;
-                    print(lista.get(nr - 1), nr, lista_length);
-                    break;
+            int x = 0;
+            while (x == 0) {
+                x=0;
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                String input = br.readLine();
+                switch (input.toLowerCase()) {
+                    case "q":
+                        Menu.print();
+                        x+=1;
+                        break;
+                    case "":
+                        nr += 1;
+                        if (nr > lista_length)
+                            nr = 1;
+                        print(lista.get(nr - 1), nr, lista_length);
+                        x+=1;
+                        break;
+                    default:
+                        System.out.println("Wybierz Enter lub Q");
+                        break;
+                }
             }
         } catch (IOException e) {
             System.out.println("Błąd odczytu");

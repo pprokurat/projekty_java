@@ -1,6 +1,6 @@
 package pl.patryk.ztpj;
 
-import com.mysql.jdbc.Driver;
+import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,8 +19,7 @@ public class ConnectionFactory {
             throw new RuntimeException("Error connecting to the database", ex);
         }
     }
-
-    public static void main(String[] args) {
-        Connection connection = ConnectionFactory.getConnection();
+        public static void main(String[] args) {
+            Connection connection = ConnectionFactory.getConnection();
+        }
     }
-}

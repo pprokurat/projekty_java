@@ -97,17 +97,18 @@ public class PracownikDao implements Dao<Pracownik> {
 
     private PreparedStatement buildDyrektorStatement(Connection connection, Dyrektor dyrektor) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("INSERT INTO pracownik(pesel, imie, nazwisko, " +
-                "wynagrodzenie, telefon, dodatek_sluzbowy, karta_sluzbowa, limit_kosztow)\n" +
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+                "stanowisko, wynagrodzenie, telefon, dodatek_sluzbowy, karta_sluzbowa, limit_kosztow)\n" +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
         ps.setLong(1, dyrektor.getPesel());
         ps.setString(2, dyrektor.getImie());
         ps.setString(3, dyrektor.getNazwisko());
-        ps.setInt(4, dyrektor.getWynagrodzenie());
-        ps.setString(5, dyrektor.getTelefon());
-        ps.setInt(6, dyrektor.getDodatek_sluzbowy());
-        ps.setString(7, dyrektor.getKarta_sluzbowa());
-        ps.setInt(8, dyrektor.getLimit_kosztow());
+        ps.setString(4,dyrektor.getStanowisko());
+        ps.setInt(5, dyrektor.getWynagrodzenie());
+        ps.setString(6, dyrektor.getTelefon());
+        ps.setInt(7, dyrektor.getDodatek_sluzbowy());
+        ps.setString(8, dyrektor.getKarta_sluzbowa());
+        ps.setInt(9, dyrektor.getLimit_kosztow());
 
 
         return ps;
@@ -115,16 +116,17 @@ public class PracownikDao implements Dao<Pracownik> {
 
     private PreparedStatement buildHandlowiecStatement(Connection connection, Handlowiec handlowiec) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("INSERT INTO pracownik(pesel, imie, nazwisko, " +
-                "wynagrodzenie, telefon, prowizja, limit_prowizji)\n" +
-                "VALUES(?, ?, ?, ?, ?, ?, ?);");
+                "stanowisko, wynagrodzenie, telefon, prowizja, limit_prowizji)\n" +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
         ps.setLong(1, handlowiec.getPesel());
         ps.setString(2, handlowiec.getImie());
         ps.setString(3, handlowiec.getNazwisko());
-        ps.setInt(4, handlowiec.getWynagrodzenie());
-        ps.setString(5, handlowiec.getTelefon());
-        ps.setInt(6, handlowiec.getProwizja());
-        ps.setInt(7, handlowiec.getLimit_prowizji());
+        ps.setString(4,handlowiec.getStanowisko());
+        ps.setInt(5, handlowiec.getWynagrodzenie());
+        ps.setString(6, handlowiec.getTelefon());
+        ps.setInt(7, handlowiec.getProwizja());
+        ps.setInt(8, handlowiec.getLimit_prowizji());
 
         return ps;
     }
