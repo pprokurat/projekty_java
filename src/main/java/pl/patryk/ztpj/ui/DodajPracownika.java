@@ -97,7 +97,7 @@ public class DodajPracownika implements UI {
                     Handlowiec handlowiec = new Handlowiec();
                     handlowiec.setStanowisko(StanowiskoEnum.HANDLOWIEC.name());
                     System.out.println("2. Dodaj pracownika");
-                    System.out.println("[D]yrektor/[H]andlowiec : Dyrektor");
+                    System.out.println("[D]yrektor/[H]andlowiec : Handlowiec");
                     System.out.println("\n------------------------");
                     System.out.print("Identyfikator PESEL : ");
                     in = new Scanner(System.in);
@@ -149,7 +149,7 @@ public class DodajPracownika implements UI {
                             break;
                         case "":
                             pracownikDao.save(handlowiec);
-                            System.out.println("dodano");
+                            System.out.println("Dodano pracownika\n");
                             break;
                         default:
                             System.out.println("Wybierz Enter lub Q");

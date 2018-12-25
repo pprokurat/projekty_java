@@ -2,7 +2,9 @@ package pl.patryk.ztpj.model;
 
 import pl.patryk.ztpj.model.enums.StanowiskoEnum;
 
-public class Dyrektor extends Pracownik {
+import java.io.Serializable;
+
+public class Dyrektor extends Pracownik implements Serializable {
     private int dodatek_sluzbowy;
     private String karta_sluzbowa;
     private int limit_kosztow;

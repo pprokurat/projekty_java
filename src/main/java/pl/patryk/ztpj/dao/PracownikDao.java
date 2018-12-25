@@ -6,6 +6,7 @@ import pl.patryk.ztpj.model.Handlowiec;
 import pl.patryk.ztpj.model.Pracownik;
 import pl.patryk.ztpj.model.enums.StanowiskoEnum;
 
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +94,27 @@ public class PracownikDao implements Dao<Pracownik> {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void writeToFile(List<Pracownik> lista, String destination) throws IOException {
+        FileOutputStream filOut = new FileOutputStream(destination);
+        ObjectOutputStream objOut = new ObjectOutputStream(filOut);
+
+        objOut.writeObject(lista);
+        objOut.close();
+        filOut.close();
+    }
+
+    @Override
+    public List<Pracownik> readFile(String source) throws IOException, ClassNotFoundException {
+        FileInputStream filIn = new FileInputStream(source);
+        ObjectInputStream objIn = new ObjectInputStream(filIn);
+
+        List<Pracownik> lista = (List<Pracownik>) objIn.readObject();
+        objIn.close();
+
+        return lista;
     }
 
     private PreparedStatement buildDyrektorStatement(Connection connection, Dyrektor dyrektor) throws SQLException {

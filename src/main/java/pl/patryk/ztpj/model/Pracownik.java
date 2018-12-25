@@ -2,7 +2,9 @@ package pl.patryk.ztpj.model;
 
 import pl.patryk.ztpj.model.enums.StanowiskoEnum;
 
-public abstract class Pracownik {
+import java.io.Serializable;
+
+public abstract class Pracownik implements Serializable {
     private int id;
     private Long pesel;
     private String imie;
@@ -10,6 +12,8 @@ public abstract class Pracownik {
     private int wynagrodzenie;
     private String telefon;
     private String stanowisko;
+
+    public Pracownik(){}
 
     public int getId() {
         return id;

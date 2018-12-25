@@ -31,6 +31,8 @@ public class Menu implements UI{
                     usun.print();
                     break;
                 case 4:
+                    KopiaZapasowa kopia = new KopiaZapasowa();
+                    kopia.print();
                     break;
                 default:
                     System.out.println("Podaj liczbę z zakresu 1-4");
@@ -40,6 +42,8 @@ public class Menu implements UI{
         } catch (IOException | NumberFormatException e) {
             System.out.println("Podaj liczbę");
             Menu.print();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
     }

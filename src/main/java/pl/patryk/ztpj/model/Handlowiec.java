@@ -2,7 +2,9 @@ package pl.patryk.ztpj.model;
 
 import pl.patryk.ztpj.model.enums.StanowiskoEnum;
 
-public class Handlowiec extends Pracownik {
+import java.io.Serializable;
+
+public class Handlowiec extends Pracownik implements Serializable {
     private int prowizja;
     private int limit_prowizji;
 

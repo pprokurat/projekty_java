@@ -26,6 +26,7 @@ public class UsunPracownika implements UI {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 String input = br.readLine();
                 Long longInput = Long.parseLong(input);
+                int y = 0;
                 for (Pracownik pracownik : lista) {
                     if (pracownik.getPesel().equals(longInput)) {
                         System.out.println("3. Usuń pracownika");
@@ -64,11 +65,12 @@ public class UsunPracownika implements UI {
                                 switch (input2.toLowerCase()) {
                                     case "q":
                                         Menu.print();
-                                        x+=1;
+                                        x += 1;
                                         break;
                                     case "":
-                                        //pracownikDao.delete(pracownik);
-                                        x+=1;
+                                        pracownikDao.delete(pracownik);
+                                        System.out.println("Usunięto pracownika\n");
+                                        x += 1;
                                         break;
                                     default:
                                         System.out.println("Wybierz Enter lub Q");
@@ -82,8 +84,12 @@ public class UsunPracownika implements UI {
                         }
                         break;
                     }
-
+                    y += 1;
                 }
+                if (y == lista.size()) {
+                    System.out.println("\nNie odnaleziono pracownika o podanym nr PESEL\n");
+                }
+
             } catch (IOException e) {
                 System.out.println("Błąd odczytu");
                 Menu.print();
