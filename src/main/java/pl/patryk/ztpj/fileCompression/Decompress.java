@@ -16,7 +16,7 @@ public class Decompress {
         FileOutputStream fos = new FileOutputStream(destination);
         GZIPInputStream gzis = new GZIPInputStream(fis);
         int read;
-        while ((read = fis.read(buffer)) != -1){
+        while ((read = gzis.read(buffer)) != -1){
             fos.write(buffer, 0, read);
         }
         gzis.close();

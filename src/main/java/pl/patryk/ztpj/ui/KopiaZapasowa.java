@@ -70,6 +70,7 @@ public class KopiaZapasowa {
                                     Compress.compress_gzip("target/files/Pracownicy.bin", "target/files/" + input3 + ".gzip");
                                 } else if (input2.toLowerCase().equals("z")) {
                                     Compress.compress_zip("target/files/Pracownicy.bin", "target/files/" + input3 + ".zip");
+                                    System.out.println("hello");
                                 } else {
                                     System.out.println("Wybierz kompresję G lub Z");
                                 }
