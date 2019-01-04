@@ -18,6 +18,8 @@ public class Menu implements UI{
             String input = br.readLine();
             int intInput = Integer.parseInt(input);
             switch (intInput) {
+                case 0:
+                    break;
                 case 1:
                     ListaPracownikow lista = new ListaPracownikow();
                     lista.print();

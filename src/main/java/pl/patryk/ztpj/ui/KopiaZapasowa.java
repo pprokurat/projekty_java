@@ -1,10 +1,8 @@
 package pl.patryk.ztpj.ui;
 
 import pl.patryk.ztpj.dao.PracownikDao;
-import pl.patryk.ztpj.fileCompression.Compress;
-import pl.patryk.ztpj.fileCompression.Decompress;
-import pl.patryk.ztpj.model.Dyrektor;
-import pl.patryk.ztpj.model.Handlowiec;
+import pl.patryk.ztpj.utils.Compress;
+import pl.patryk.ztpj.utils.Decompress;
 import pl.patryk.ztpj.model.Pracownik;
 
 import java.io.BufferedReader;

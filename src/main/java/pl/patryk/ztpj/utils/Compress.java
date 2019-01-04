@@ -1,4 +1,4 @@
-package pl.patryk.ztpj.fileCompression;
+package pl.patryk.ztpj.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
