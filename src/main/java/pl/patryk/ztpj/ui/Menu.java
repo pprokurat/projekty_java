@@ -12,6 +12,7 @@ public class Menu implements UI{
         System.out.println("2. Dodaj pracownika");
         System.out.println("3. Usuń pracownika");
         System.out.println("4. Kopia zapasowa");
+        System.out.println("5. Pobierz dane z sieci");
         System.out.print("Wybór>");
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -35,6 +36,10 @@ public class Menu implements UI{
                 case 4:
                     KopiaZapasowa kopia = new KopiaZapasowa();
                     kopia.print();
+                    break;
+                case 5:
+                    PobierzDane pobierz = new PobierzDane();
+                    pobierz.print();
                     break;
                 default:
                     System.out.println("Podaj liczbę z zakresu 1-4");

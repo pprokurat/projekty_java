@@ -8,28 +8,31 @@ import java.net.*;
 import java.util.List;
 
 public class Client {
-    private static final String HOST = "localhost";
-    private static final int PORT = 1234;
+    private static String host;
+    private static int port;
 
-    public void runClient() throws IOException, ClassNotFoundException {
-        Socket socket1 = new Socket(HOST,Server.PORT,InetAddress.getByName(HOST),PORT);
+    public Client(){
+        host = "localhost";
+        port = 1234;
+    }
+
+    public Client(String address, int port){
+        host = address;
+        this.port = port;
+    }
+
+    public List<Pracownik> runClient() throws IOException, ClassNotFoundException {
+        Socket socket1 = new Socket(host,Server.PORT,InetAddress.getByName(host),port);
 
         DataOutputStream dataOutputStream = new DataOutputStream(socket1.getOutputStream());
         dataOutputStream.writeUTF("GET");
 
-        ObjectInputStream oos = new ObjectInputStream(socket1.getInputStream());
-        List<Pracownik> lista_pobrana = (List<Pracownik>)oos.readObject();
-        PracownikDao pracownikDao = new PracownikDao();
-        List<Pracownik> lista = pracownikDao.getAll();
+        ObjectInputStream ois = new ObjectInputStream(socket1.getInputStream());
+        List<Pracownik> lista_pobrana = (List<Pracownik>)ois.readObject();
 
-        for (Pracownik pracownik : lista) {
-            pracownikDao.delete(pracownik);
-        }
-
-        for (Pracownik pracownik : lista_pobrana) {
-            pracownikDao.save(pracownik);
-        }
         socket1.close();
+
+        return lista_pobrana;
     }
 
 }

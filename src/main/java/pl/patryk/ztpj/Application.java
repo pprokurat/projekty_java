@@ -10,14 +10,14 @@ public class Application {
     public static void main(String[] args) {
 
         NowyWatek thread1 = new NowyWatek("thread1");
-        Client klient = new Client();
-        try {
-            klient.runClient();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        Client klient = new Client();
+//        try {
+//            klient.runClient();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         Menu.print();
     }

@@ -11,7 +11,8 @@ public class Server {
         ServerSocket s = new ServerSocket(PORT);
         while (true) {
             Socket incoming = s.accept();
-            System.out.println("Spawning"+i);
+            //System.out.println("Spawning"+i);
+            System.out.println("Łączenie...");
             Runnable r = new ThreadHandler(incoming, incoming.getInetAddress(),incoming.getPort());
             Thread t = new Thread(r);
             t.start();
