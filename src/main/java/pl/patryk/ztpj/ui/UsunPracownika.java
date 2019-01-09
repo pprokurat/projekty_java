@@ -5,10 +5,9 @@ import pl.patryk.ztpj.model.Dyrektor;
 import pl.patryk.ztpj.model.Handlowiec;
 import pl.patryk.ztpj.model.Pracownik;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class UsunPracownika implements UI {
 
@@ -23,9 +22,8 @@ public class UsunPracownika implements UI {
             Menu.print();
         } else {
             try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String input = br.readLine();
-                Long longInput = Long.parseLong(input);
+                Scanner input = new Scanner(System.in);
+                Long longInput = input.nextLong();
                 int y = 0;
                 for (Pracownik pracownik : lista) {
                     if (pracownik.getPesel().equals(longInput)) {
@@ -60,9 +58,9 @@ public class UsunPracownika implements UI {
                             int x = 0;
                             while (x == 0) {
                                 x = 0;
-                                BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));
-                                String input2 = br2.readLine();
-                                switch (input2.toLowerCase()) {
+                                Scanner input2 = new Scanner(System.in);
+                                String stringInput = input2.nextLine();
+                                switch (stringInput.toLowerCase()) {
                                     case "q":
                                         Menu.print();
                                         x += 1;
@@ -78,7 +76,7 @@ public class UsunPracownika implements UI {
                                         break;
                                 }
                             }
-                        } catch (IOException e) {
+                        } catch (InputMismatchException e) {
                             System.out.println("Błąd odczytu");
                             Menu.print();
                         }
@@ -90,7 +88,7 @@ public class UsunPracownika implements UI {
                     System.out.println("\nNie odnaleziono pracownika o podanym nr PESEL\n");
                 }
 
-            } catch (IOException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Błąd odczytu");
                 Menu.print();
             }

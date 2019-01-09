@@ -5,10 +5,9 @@ import pl.patryk.ztpj.model.Dyrektor;
 import pl.patryk.ztpj.model.Handlowiec;
 import pl.patryk.ztpj.model.Pracownik;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListaPracownikow implements UI {
 
@@ -57,9 +56,9 @@ public class ListaPracownikow implements UI {
             int x = 0;
             while (x == 0) {
                 x=0;
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String input = br.readLine();
-                switch (input.toLowerCase()) {
+                Scanner input = new Scanner(System.in);
+                String stringInput = input.nextLine();
+                switch (stringInput.toLowerCase()) {
                     case "q":
                         Menu.print();
                         x+=1;
@@ -76,7 +75,7 @@ public class ListaPracownikow implements UI {
                         break;
                 }
             }
-        } catch (IOException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }

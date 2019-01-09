@@ -1,8 +1,8 @@
 package pl.patryk.ztpj.ui;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Menu implements UI{
 
@@ -13,11 +13,11 @@ public class Menu implements UI{
         System.out.println("3. Usuń pracownika");
         System.out.println("4. Kopia zapasowa");
         System.out.println("5. Pobierz dane z sieci");
+        System.out.println("\n0. Wyjście z programu");
         System.out.print("Wybór>");
         try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String input = br.readLine();
-            int intInput = Integer.parseInt(input);
+            Scanner input = new Scanner(System.in);
+            int intInput = input.nextInt();
             switch (intInput) {
                 case 0:
                     break;
@@ -46,7 +46,7 @@ public class Menu implements UI{
                     Menu.print();
                     break;
             }
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException | InputMismatchException e) {
             System.out.println("Podaj liczbę");
             Menu.print();
         } catch (ClassNotFoundException e) {

@@ -4,42 +4,36 @@ import pl.patryk.ztpj.Client;
 import pl.patryk.ztpj.dao.PracownikDao;
 import pl.patryk.ztpj.model.Pracownik;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class PobierzDane {
 
     public void print() throws IOException, ClassNotFoundException {
+        //Adres: localhost, Port: 1234
         System.out.println("5. Pobierz dane z sieci");
         System.out.print("Adres : ");
-        String input = "";
+        String stringInput = "";
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            input = br.readLine();
-        } catch (IOException e) {
+            Scanner input = new Scanner(System.in);
+            stringInput = input.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
-        if(input.equals("")) input = "localhost";
+        if(stringInput.equals("")) stringInput = "localhost";
         System.out.print("Port : ");
-        String input2 = "";
         int intInput = 0;
         try {
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));
-            input2 = br2.readLine();
-            intInput = Integer.parseInt(input2);
-        } catch (IOException e) {
+            Scanner input2 = new Scanner(System.in);
+            intInput = input2.nextInt();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
         if(intInput == 0) intInput = 1234;
 
-        Client klient = new Client(input, intInput);
+        Client klient = new Client(stringInput, intInput);
 
         List<Pracownik> lista_pobrana = klient.runClient();
 
@@ -50,16 +44,16 @@ public class PobierzDane {
 
         System.out.print("Czy zapisać pobrane dane? [T]/[N] ");
 
-        String input3 = "";
+        String stringInput2 = "";
         try {
-            BufferedReader br3 = new BufferedReader(new InputStreamReader(System.in));
-            input3 = br3.readLine();
-        } catch (IOException e) {
+            Scanner input3 = new Scanner(System.in);
+            stringInput2 = input3.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
 
-        switch (input3.toLowerCase()) {
+        switch (stringInput2.toLowerCase()) {
             case "t":
                 for (Pracownik pracownik : lista) {
                     pracownikDao.delete(pracownik);
@@ -81,16 +75,16 @@ public class PobierzDane {
 
         System.out.println("[ENTER] - powrót do ekranu głównego");
 
-        String input4 = "";
+        String stringInput3 = "";
         try {
-            BufferedReader br4 = new BufferedReader(new InputStreamReader(System.in));
-            input3 = br4.readLine();
-        } catch (IOException e) {
+            Scanner input4 = new Scanner(System.in);
+            stringInput3 = input4.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
 
-        switch (input4.toLowerCase()) {
+        switch (stringInput3.toLowerCase()) {
             case "":
                 Menu.print();
                 break;

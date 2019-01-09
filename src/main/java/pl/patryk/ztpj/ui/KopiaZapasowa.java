@@ -5,48 +5,49 @@ import pl.patryk.ztpj.utils.Compress;
 import pl.patryk.ztpj.utils.Decompress;
 import pl.patryk.ztpj.model.Pracownik;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class KopiaZapasowa {
 
+    public static final String PATH = "output/";
     private PracownikDao pracownikDao = new PracownikDao();
     private List<Pracownik> lista = pracownikDao.getAll();
 
     public void print() throws IOException, ClassNotFoundException {
         System.out.println("4. Kopia zapasowa");
         System.out.print("[Z]achowaj/[O]dtwórz : ");
-        String input = "";
+        String stringInput = "";
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            input = br.readLine();
-        } catch (IOException e) {
+            Scanner input = new Scanner(System.in);
+            stringInput = input.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
         System.out.println("------------------------");
         System.out.print("Kompresja [G]zip/[Z]ip : ");
-        String input2 = "";
+        String stringInput2 = "";
         try {
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));
-            input2 = br2.readLine();
-        } catch (IOException e) {
+            Scanner input2 = new Scanner(System.in);
+            stringInput2 = input2.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
         System.out.print("Nazwa pliku : ");
-        String input3 = "";
+        String stringInput3 = "";
         try {
-            BufferedReader br3 = new BufferedReader(new InputStreamReader(System.in));
-            input3 = br3.readLine();
-        } catch (IOException e) {
+            Scanner input3 = new Scanner(System.in);
+            stringInput3 = input3.nextLine();
+        } catch (InputMismatchException e) {
             System.out.println("Błąd odczytu");
             Menu.print();
         }
 
-        switch (input.toLowerCase()) {
+        switch (stringInput.toLowerCase()) {
             case "z":
                 System.out.println("------------------------");
                 System.out.println("[Enter] – potwierdź");
@@ -55,19 +56,19 @@ public class KopiaZapasowa {
                     int x = 0;
                     while (x == 0) {
                         x = 0;
-                        BufferedReader br4 = new BufferedReader(new InputStreamReader(System.in));
-                        String input4 = br4.readLine();
-                        switch (input4.toLowerCase()) {
+                        Scanner input4 = new Scanner(System.in);
+                        String stringInput4 = input4.nextLine();
+                        switch (stringInput4.toLowerCase()) {
                             case "q":
                                 Menu.print();
                                 x += 1;
                                 break;
                             case "":
-                                pracownikDao.writeToFile(lista,"target/files/Pracownicy.bin");
-                                if (input2.toLowerCase().equals("g")) {
-                                    Compress.compress_gzip("target/files/Pracownicy.bin", "target/files/" + input3 + ".gzip");
-                                } else if (input2.toLowerCase().equals("z")) {
-                                    Compress.compress_zip("target/files/Pracownicy.bin", "target/files/" + input3 + ".zip");
+                                pracownikDao.writeToFile(lista,PATH + "Pracownicy.bin");
+                                if (stringInput2.toLowerCase().equals("g")) {
+                                    Compress.compress_gzip(PATH + "Pracownicy.bin", PATH + stringInput3 + ".gzip");
+                                } else if (stringInput2.toLowerCase().equals("z")) {
+                                    Compress.compress_zip(PATH + "Pracownicy.bin", PATH + stringInput3 + ".zip");
                                 } else {
                                     System.out.println("Wybierz kompresję G lub Z");
                                 }
@@ -92,18 +93,18 @@ public class KopiaZapasowa {
                     int x = 0;
                     while (x == 0) {
                         x = 0;
-                        BufferedReader br4 = new BufferedReader(new InputStreamReader(System.in));
-                        String input4 = br4.readLine();
-                        switch (input4.toLowerCase()) {
+                        Scanner input4 = new Scanner(System.in);
+                        String stringInput4 = input4.nextLine();
+                        switch (stringInput4.toLowerCase()) {
                             case "q":
                                 Menu.print();
                                 x += 1;
                                 break;
                             case "":
-                                if (input2.toLowerCase().equals("g")) {
-                                    Decompress.decompress_gzip("target/files/" + input3 + ".gzip", "target/files/Pracownicy.bin");
-                                } else if (input2.toLowerCase().equals("z")) {
-                                    Decompress.decompress_zip("target/files/" + input3 + ".zip", "target/files");
+                                if (stringInput2.toLowerCase().equals("g")) {
+                                    Decompress.decompress_gzip(PATH + stringInput3 + ".gzip", PATH + "Pracownicy.bin");
+                                } else if (stringInput2.toLowerCase().equals("z")) {
+                                    Decompress.decompress_zip(PATH + stringInput3 + ".zip", PATH);
                                 } else {
                                     System.out.println("Wybierz dekompresję G lub Z");
                                 }
@@ -112,7 +113,7 @@ public class KopiaZapasowa {
                                     pracownikDao.delete(pracownik);
                                 }
 
-                                List<Pracownik> lista_odczyt = pracownikDao.readFile("target/files/Pracownicy.bin");
+                                List<Pracownik> lista_odczyt = pracownikDao.readFile(PATH + "Pracownicy.bin");
 
                                 for (Pracownik pracownik : lista_odczyt) {
                                     pracownikDao.save(pracownik);

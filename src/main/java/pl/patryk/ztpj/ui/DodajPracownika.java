@@ -6,9 +6,7 @@ import pl.patryk.ztpj.model.Handlowiec;
 import pl.patryk.ztpj.model.Pracownik;
 import pl.patryk.ztpj.model.enums.StanowiskoEnum;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,9 +19,9 @@ public class DodajPracownika implements UI {
         System.out.println("2. Dodaj pracownika");
         System.out.print("[D]yrektor/[H]andlowiec : ");
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String input = br.readLine();
-            switch (input.toLowerCase()) {
+            Scanner input = new Scanner(System.in);
+            String stringInput = input.nextLine();
+            switch (stringInput.toLowerCase()) {
                 case "d":
                     Dyrektor dyrektor = new Dyrektor();
                     dyrektor.setStanowisko(StanowiskoEnum.DYREKTOR.name());
@@ -78,8 +76,9 @@ public class DodajPracownika implements UI {
                     System.out.println("[Enter] – potwierdź");
                     System.out.println("[Q] – porzuć");
 
-                    String input2 = br.readLine();
-                    switch (input2.toLowerCase()) {
+                    input = new Scanner(System.in);
+                    stringInput = input.nextLine();
+                    switch (stringInput.toLowerCase()) {
                         case "q":
                             Menu.print();
                             break;
@@ -142,8 +141,9 @@ public class DodajPracownika implements UI {
                     System.out.println("[Enter] – potwierdź");
                     System.out.println("[Q] – porzuć");
 
-                    input2 = br.readLine();
-                    switch (input2.toLowerCase()) {
+                    input = new Scanner(System.in);
+                    stringInput = input.nextLine();
+                    switch (stringInput.toLowerCase()) {
                         case "q":
                             Menu.print();
                             break;
@@ -162,7 +162,7 @@ public class DodajPracownika implements UI {
                     break;
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException e) {
             e.printStackTrace();
         }
     }

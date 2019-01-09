@@ -2,6 +2,7 @@ package pl.patryk.ztpj;
 
 import pl.patryk.ztpj.dao.PracownikDao;
 import pl.patryk.ztpj.model.Pracownik;
+import pl.patryk.ztpj.ui.KopiaZapasowa;
 
 import javax.sound.sampled.Port;
 import java.io.*;
@@ -30,7 +31,7 @@ public class ThreadHandler implements Runnable {
     public void run() {
         try {
             PracownikDao pracownikDao = new PracownikDao();
-            List<Pracownik> lista_odczyt = pracownikDao.readFile("target/files/Pracownicy.bin");
+            List<Pracownik> lista_odczyt = pracownikDao.readFile(KopiaZapasowa.PATH + "Pracownicy.bin");
 
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(lista_odczyt);
