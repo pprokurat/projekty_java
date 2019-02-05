@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.util.HashMap;
 
 public class NowyWatek implements Runnable {
 
@@ -24,6 +26,8 @@ public class NowyWatek implements Runnable {
     public void run() {
 
         try {
+            Server.tokens = new HashMap<>();
+            LocateRegistry.createRegistry(1099);
             Naming.rebind("localhost",new ValidatorImpl());
             //System.out.println("Login server open for business");
         } catch (RemoteException e) {
