@@ -23,11 +23,8 @@ public class PobierzDane {
             Scanner input = new Scanner(System.in);
             String user = input.nextLine();
             System.out.print("Podaj hasło : ");
-            //Scanner input2 = new Scanner(System.in);
-            //String pass = input2.nextLine();
-            Console console = System.console();
-            char[] passwordArray = console.readPassword();
-            String pass = new String(passwordArray);
+            Scanner input2 = new Scanner(System.in);
+            String pass = input2.nextLine();
 
             if(klient.authenticate(user,pass)==false){
                 throw new AuthenticationException();
@@ -40,7 +37,7 @@ public class PobierzDane {
             if (stringInput.equals("")) {stringInput = "localhost";}
             System.out.print("Port : ");
             int intInput = 0;
-            Scanner input2;
+            //Scanner input2;
             input2 = new Scanner(System.in);
             intInput = input2.nextInt();
             if (intInput == 0){ intInput = 1234;}
