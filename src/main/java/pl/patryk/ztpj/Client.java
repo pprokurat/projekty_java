@@ -59,18 +59,18 @@ public class Client {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        if(tokenExpired(token)) {
-            System.out.println("Token wygasł.");
-            return false;
-        }
+//        if(tokenExpired(token)) {
+//            System.out.println("Token wygasł.");
+//            return false;
+//        }
         return true;
     }
 
-    private boolean tokenExpired(String token) {
-        long expiryTime = Server.tokens.get(token);
-        long difference = System.currentTimeMillis() - expiryTime;
-        return difference > 120000;
-    }
+//    private boolean tokenExpired(String token) {
+//        long expiryTime = Server.tokens.get(token);
+//        long difference = System.currentTimeMillis() - expiryTime;
+//        return difference > 120000;
+//    }
 
     public List<Pracownik> runClient(String host, int port) throws IOException, ClassNotFoundException, NotBoundException {
 
@@ -78,6 +78,7 @@ public class Client {
 
         DataOutputStream dataOutputStream = new DataOutputStream(socket1.getOutputStream());
         dataOutputStream.writeUTF(token);
+        dataOutputStream.flush();
 
         ObjectInputStream ois = new ObjectInputStream(socket1.getInputStream());
         List<Pracownik> lista_pobrana = (List<Pracownik>)ois.readObject();

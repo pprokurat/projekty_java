@@ -46,6 +46,11 @@ public class PobierzDane {
             List<Pracownik> lista_pobrana = null;
             lista_pobrana = klient.runClient(stringInput,intInput);
 
+            if (lista_pobrana.isEmpty()){
+                System.out.println("Token wygasł.");
+                throw new AuthenticationException();
+            }
+
 
             System.out.println("------------------------");
 
