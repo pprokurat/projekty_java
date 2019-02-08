@@ -2,15 +2,15 @@ package pl.patryk.ztpj.rmi;
 
 import pl.patryk.ztpj.Server;
 
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.ldap.InitialLdapContext;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ValidatorImpl extends UnicastRemoteObject implements Validator {
     //UnicastRemoteObject implements Remote interface
@@ -31,7 +31,7 @@ public class ValidatorImpl extends UnicastRemoteObject implements Validator {
 
         //String token;
 
-        if(getMemberMap().containsKey(aUserName) && getMemberMap().get(aUserName).equals(aPassword)){
+        if(existsInInternalDB(aUserName,aPassword) || existsInLDAP(aUserName, aPassword)){
             //String genToken = "token";
             SecureRandom random = new SecureRandom();
             byte bytes[] = new byte[20];
@@ -51,8 +51,32 @@ public class ValidatorImpl extends UnicastRemoteObject implements Validator {
         return token;
     }
 
-    public Map getMemberMap() {
-        return memberMap;
+    //public Map getMemberMap() { return memberMap; }
+
+    private boolean existsInLDAP(String username, String password) {
+
+        Hashtable<String, String> env = new Hashtable<>();
+        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+        env.put(Context.PROVIDER_URL, "ldap://82.145.72.13:389");
+        env.put(Context.SECURITY_AUTHENTICATION, "simple");
+        env.put(Context.SECURITY_PRINCIPAL, "wipsad\\" + username);
+        env.put(Context.SECURITY_CREDENTIALS, password);
+
+        try
+        {
+            new InitialLdapContext(env, null);
+            return true;
+        }
+        catch (NamingException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
+    private boolean existsInInternalDB(String username, String password) {
+        return memberMap.containsKey(username) && memberMap.get(username).equals(password);
     }
 
 //    public static void main(String[] args) {

@@ -25,6 +25,7 @@ public class PobierzDane {
             System.out.print("Podaj hasło : ");
             Scanner input2 = new Scanner(System.in);
             String pass = input2.nextLine();
+            //char[] pass = System.console().readPassword("[%s]", "Password:");
 
             if(klient.authenticate(user,pass)==false){
                 throw new AuthenticationException();
